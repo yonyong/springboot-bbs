@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.connext.yonyong.yonyongbbs.dao.ArticleDao">
+        <resultMap type="Article" id="articleMap" >
+            <id property="id" column="id"/>
+            <result property="userid" column="userid"/>
+            <result property="title" column="title"/>
+            <result property="author" column="author"/>
+            <result property="date" column="date"/>
+            <result property="content" column="content"/>
+        </resultMap>
+
+    <select id="queryAllArticle" resultMap="articleMap">
+        select * from article
+    </select>
+
+    <select id="selectAllArticle" parameterType="int" resultMap="articleMap">
+        select * from article order by date DESC limit #{page},3
+    </select>
+
+    <select id="selectArticleById" resultType="Article">
+        select * from article where id=#{id}
+    </select>
+
+    <insert id="addArticle">
+        insert into article(userid,title,author,date,content) values (#{userid},#{title},#{author},#{date},#{content})
+    </insert>
+
+    <update id="updateArticle">
+        update article set title=#{title},date=#{date},content=#{content} where id=#{id}
+    </update>
+
+    <delete id="deleteArticle" parameterType="int">
+        delete from article where id=#{id}
+    </delete>
+</mapper>

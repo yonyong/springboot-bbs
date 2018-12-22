@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.connext.yonyong.yonyongbbs.dao.ReplyDao">
+    <resultMap type="Reply" id="replyMap" >
+        <id property="id" column="id"/>
+        <result property="article_id" column="article_id"/>
+        <result property="replyer" column="replyer"/>
+        <result property="date" column="date"/>
+        <result property="reply" column="reply"/>
+    </resultMap>
+    <select id="selectAllReplyByArticleID" parameterType="int" resultMap="replyMap">
+        select * from reply where article_id=#{article_id} order by date DESC
+    </select>
+
+    <select id="selectAllReply" parameterType="int" resultMap="replyMap">
+        select * from reply where article_id=#{article_id} order by date DESC limit #{replypage},3
+    </select>
+
+    <insert id="addReply">
+        insert into reply(article_id,replyer,date,reply) values (#{article_id},#{replyer},#{date},#{reply})
+    </insert>
+
+    <delete id="deleteReply" parameterType="int">
+        delete from reply where id=#{id}
+    </delete>
+</mapper>

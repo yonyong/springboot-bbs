@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>消息详情</title>
+    <link href="/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="/My97DatePicker/WdatePicker.js"></script>
+</head>
+<body>
+
+                <input type="hidden" th:value="${article.id}" name="id" />
+                <input type="text" th:border="0" id="title" align="center" th:value="${article.title}"name="title" width=200/>
+
+                <input type="text" th:border="0" id="author" align="center"  th:value="${article.author}"name="author" width=200/>
+                <input type="text" th:border="0" readonly="true"  onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" th:value="${article.date}" name="date" width=200/>
+
+
+		<textarea  id="deblock_udid" th:border="0"
+                  name="content" rows="8" style="min-width: 90%" placeholder="内容" th:text="${article.content}"> </textarea>
+
+                <input type="submit"  value="保存"  onclick="form1.action='editInfo';form1.submit()">
+
+
+                <input type="submit"  align="left" value="删除" onclick="form1.action='deleteInfo';form1.submit()" >
+
+            <textarea  id="u_reply"  th:border="0"
+                      name="content" rows="8" style="min-width: 90%" placeholder="内容 "> </textarea>
+
+                <input type="submit"  align="center" value="提交">
+
+                <!--评论-->
+                <table class="table" align="center">
+
+                    <tr th:each="temp:${replies}">
+                        <!--<th><a href="#" th:href="@{Info(id=${temp.id})}" th:text="${temp.title}"></a></th>-->
+                        <th th:text="${temp.replyer}"></th>
+                        <th th:text="${temp.date}"></th>
+                        <th th:text="${temp.reply}">2018-12-20</th>
+                        <!--<td><a href="#" th:href="@{Info(id=${temp.id})}">查看</a></td>-->
+                        <!--<td><a href="#" th:href="@{deleteInfo(id=${temp.id})}">删除</a></td>-->
+                    </tr>
+                </table>
+
+            <!--<div class="table-responsive" align="center">-->
+                <!--<br/>  <br/>  <br/>-->
+                <!--<p align="center">评论 </p>-->
+                <!--<table class="table" align="center">-->
+                    <!--<p th:each="temp:${replies}">-->
+                        <!--<tr>-->
+                            <!--<input type="hidden" th:value="${temp.id}" name="reply_id" />-->
+                            <!--<th th:text="${temp.replyer}"></th>-->
+                            <!--<th th:text="${temp.date}"></th>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                    <!--<textarea class="form-control" id="reply"  border="0"-->
+                              <!--name="content" rows="2" style="min-width: 90%" placeholder="内容" th:text="${article.content}> </textarea>-->
+                    <!--</tr>-->
+                <!--</p>-->
+            <!--</table>-->
+        <!--</div>-->
+        <!--</form>-->
+
+<script src="/jquery/jquery-3.3.1.min.js"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+<script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+</body>
+</html>

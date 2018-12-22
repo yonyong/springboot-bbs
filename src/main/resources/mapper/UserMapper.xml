@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.connext.yonyong.yonyongbbs.dao.UserDao">
+    <select id="selectUserByTel" parameterType="String" resultType="User">
+      select * from user where tel=#{tel}
+    </select>
+
+    <select id="selectUser" resultType="User">
+      select * from user where tel=#{tel} and password=#{password}
+    </select>
+
+    <insert id="addUser">
+        insert into user(nickname,tel,password) values (#{nickname},#{tel},#{password})
+    </insert>
+
+</mapper>

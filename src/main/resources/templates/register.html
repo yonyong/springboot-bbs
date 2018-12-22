@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>login system</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/fontAwesome.css">
+    <link rel="stylesheet" href="css/light-box.css">
+    <link rel="stylesheet" href="css/templatemo-style.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Kanit:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+    <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">
+        <a href="/">返回<em>大厅</em></a>
+    </div>
+</nav>
+
+<div class="page-heading">
+    <div class="container">
+        <div class="heading-content">
+            <h1>register <em>system</em></h1>
+        </div>
+    </div>
+</div>
+
+
+<div class="blog-entries">
+    <div class="container">
+        <div class="col-md-1"></div>
+        <div class="col-md-5"><img src="/img/blog_post_3.png" width="420"
+                                   height="330">
+        </div>
+        <div class="col-md-5">
+
+            <form id="myform">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="nickname" name="nickname" placeholder="输入一个你喜欢的昵称">
+
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="tel" name="tel" placeholder="手机号码">
+
+                </div>
+
+
+
+
+                <!-- 手机验证码模块 -->
+
+
+                <div id="telDiv" class="form-group">
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="volidate" name="volidate" placeholder="短信验证码">
+                    </div>
+                    <div class="col-md-3">
+                        <input type="button" id="yanzhengma" class="btn btn-default" value="获取验证码"> <br/><br/>
+                        <img alt="验证码" id="telcode" src="validateTel" style="display:none" />
+                    </div>
+
+
+
+                </div>
+
+
+
+                <!-- 图形验证码模块 -->
+                <div id="imageDiv" style="display:none" >
+                    <div class="form-group">
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="text" id="validateCode" class="form-control" name="validateCode">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+
+                            <img alt="验证码" id="imagecode" src="validateImage"/>
+                        </div>
+                        <div class="col-md-2">
+                            <a href="javascript:reloadCode()">变</a><br>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="button" id="yanzheng" class="btn btn-default btn-lg btn-block" value="验证">
+                    </div>
+                </div>
+                <!-- 密码及登陆 -->
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="密码">
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"> 我已阅读并同意<a href="success">《用户注册协议》</a>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <input type="button" id="submit" class="btn btn-default btn-lg btn-block" value="注册">
+                </div>
+            </form>
+            <div class="form-group">
+                <label><font color="red" >完成注册即可获取500积分</font></label>
+                <a href="tologin">点我登陆</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+    </div>
+</div>
+
+
+
+<!-- Modal button -->
+<div class="popup-icon">
+    <button id="modBtn" class="modal-btn"><img src="img/contact-icon.png" alt=""></button>
+</div>
+
+<!-- Modal -->
+<div id="modal" class="modal">
+    <!-- Modal Content -->
+    <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <div id="unlogin">
+                <h3 class="header-title">欢迎使用老杨的系统</h3>
+                <br><br>
+                <h4><a href="/tologin">点我登陆</a></h4>
+                <br><br>
+                <h4>没有账号？</h4>
+                <br><br>
+                <h4><a href="/toregister">点我注册</a></h4>
+            </div>
+            <div class="close-btn"><img src="img/close_contact.png" alt=""></div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+
+<script src="js/vendor/bootstrap.min.js"></script>
+
+<script src="js/plugins.js"></script>
+<script src="js/main.js"></script>
+<script type="text/javascript" src="/js/register.js"></script>
+
+</body>
+</html>
