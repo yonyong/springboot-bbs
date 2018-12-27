@@ -5,8 +5,16 @@ package cn.connext.yonyong.yonyongbbs.entity;
  */
 public class Role {
     private int id;
-    private int user_id;
     private String role;
+    private int level;
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
     public int getId() {
         return id;
@@ -14,14 +22,6 @@ public class Role {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
     }
 
     public String getRole() {

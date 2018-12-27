@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.connext.yonyong.yonyongbbs.dao.User_roleDao">
+    <resultMap type="User_role" id="user_RoleMap" >
+        <id property="userid" column="userid"/>
+        <result property="roleid" column="roleid"/>
+    </resultMap>
+
+    <select id="queryByUserId" parameterType="int" resultType="User_role">
+            select * from user_role where userid=#{userid}
+    </select>
+
+    <insert id="add">
+            insert into user_role values (#{userid},#{roleid})
+    </insert>
+
+    <delete id="delete" parameterType="int">
+            delete from user_role where userid=#{userid}
+    </delete>
+
+    <update id="update">
+            update user_role set roleid=#{roleid} where userid=#{userid}
+    </update>
+
+    <update id="updateAll" parameterType="int">
+             update user_role set roleid=3 where roleid=#{roleid}
+    </update>
+</mapper>

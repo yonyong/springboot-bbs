@@ -4,11 +4,26 @@ import cn.connext.yonyong.yonyongbbs.entity.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  *
  */
 @Repository
 public interface UserDao {
+    /**
+     * 查询所有用户
+     * @return
+     */
+    List<User> selectAllUser();
+
+    /**
+     * 分页查询所有数据
+     * @param page
+     * @return
+     */
+    List<User> selectAllUserByPage(int page);
+
     /**
      * 通过用户id查询用户
      * @param tel

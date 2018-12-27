@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.connext.yonyong.yonyongbbs.dao.Role_perDao">
+    <resultMap type="Role_per" id="role_perMap" >
+        <id property="roleid" column="roleid"/>
+        <result property="perid" column="perid"/>
+    </resultMap>
+    <select id="selectPermission" parameterType="int" resultMap="role_perMap">
+        select * from role_per where roleid=#{roleid}
+    </select>
+
+    <insert id="addPermission">
+        insert into role_per values (#{roleid},#{perid})
+    </insert>
+
+    <update id="editPermission">
+        update role_per set perid=#{afterperid} where role=#{roleid} and perid=#{afterperid}
+    </update>
+
+    <delete id="deletePermission">
+        delete from role_per where roleid=#{roleid} and perid=#{perid}
+    </delete>
+
+    <delete id="deleteAll">
+        delete from role_per where roleid=#{roleid}
+    </delete>
+</mapper>

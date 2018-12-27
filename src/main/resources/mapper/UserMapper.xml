@@ -3,6 +3,18 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.connext.yonyong.yonyongbbs.dao.UserDao">
+    <resultMap type="User" id="userMap" >
+        <id property="id" column="id"/>
+        <result property="nickname" column="nickname"/>
+        <result property="tel" column="tel"/>
+        <result property="password" column="password"/>
+    </resultMap>
+    <select id="selectAllUserByPage" parameterType="int" resultMap="userMap">
+          select * from user order by id DESC limit #{page},3
+        </select>
+    <select id="selectAllUser" resultMap="userMap">
+      select * from user
+    </select>
     <select id="selectUserByTel" parameterType="String" resultType="User">
       select * from user where tel=#{tel}
     </select>

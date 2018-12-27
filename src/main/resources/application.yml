@@ -4,8 +4,8 @@ server:
 spring:
   datasource:
     druid:
-      url: jdbc:mysql://localhost:3306/bbs?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false
-      username: root
+      url: jdbc:mysql://localhost:3306/bbs?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false&allowMultiQueries=true
+      username: 
       password: 
       initial-size: 1
       min-idle: 1

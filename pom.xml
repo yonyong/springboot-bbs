@@ -93,13 +93,27 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-pool2 -->
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.apache.commons/commons-pool2 &ndash;&gt;-->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
             <version>2.4.2</version>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>net.minidev</groupId>-->
+            <!--<artifactId>json-smart</artifactId>-->
+            <!--<version>2.3</version>-->
+            <!--<scope>compile</scope>-->
+        <!--</dependency>-->
+        <!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib -->
 
+        <!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib -->
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>2.4</version>
+            <classifier>jdk15</classifier>
+        </dependency>
     </dependencies>
 
 

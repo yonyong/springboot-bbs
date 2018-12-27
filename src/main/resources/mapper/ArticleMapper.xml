@@ -20,6 +20,14 @@
         select * from article order by date DESC limit #{page},3
     </select>
 
+    <select id="selectAllArticleByUserId" parameterType="int" resultMap="articleMap">
+        select * from article where userid=#{id}
+    </select>
+
+    <select id="selectArticleByUserId" resultMap="articleMap">
+        select * from article where userid=#{id} order by date DESC limit #{page},3
+    </select>
+
     <select id="selectArticleById" resultType="Article">
         select * from article where id=#{id}
     </select>

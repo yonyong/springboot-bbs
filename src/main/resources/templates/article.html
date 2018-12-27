@@ -90,7 +90,7 @@
                             <li class="active"><a href="#" th:href="@{page(page=1)}"><<</a></li>
                             <li><a href="#" th:href="@{page(page=${page}-1)}"><</a></li>
                             <li><a href="#" th:href="@{page(page=${page}+1)}">></a></li>
-                            <li><a href="#">>></a></li>
+                            <li><a th:text="${page}"></a></li>
                         </ul>
                     </div>
                 </div>
@@ -153,6 +153,9 @@
                     </li>
                     <li>
                         <a href="/toregister">注册</a>
+                    </li>
+                    <li>
+                        <a href="/tologout">登出</a>
                     </li>
                 </ul>
                 <p>may you happy to use laoyang's bbs</p>

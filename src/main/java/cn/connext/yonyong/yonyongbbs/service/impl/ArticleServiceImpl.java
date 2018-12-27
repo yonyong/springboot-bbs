@@ -33,6 +33,16 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public List<Article> selectAllArticleByUserId(int id) {
+        return articleDao.selectAllArticleByUserId(id);
+    }
+
+    @Override
+    public List<Article> selectArticleByUserId(int id, int page) {
+        return articleDao.selectArticleByUserId(id,page);
+    }
+
+    @Override
     public void addArticle(int userid, String title, String author, Date date, String content) {
         articleDao.addArticle(userid,title,author,date,content);
     }

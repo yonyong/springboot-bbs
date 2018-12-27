@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.connext.yonyong.yonyongbbs.dao.RoleDao">
+    <resultMap type="Role" id="roleMap" >
+        <id property="id" column="id"/>
+        <result property="role" column="role"/>
+        <result property="level" column="level"/>
+    </resultMap>
+
+    <select id="selectAllRoleByPage" parameterType="int" resultMap="roleMap">
+        select * from role limit #{page},3
+    </select>
+
+    <select id="selectAllRole" resultMap="roleMap">
+        select * from role
+    </select>
+
+    <select id="selectRoleById" parameterType="Integer" resultType="Role">
+        select * from role where id=#{id}
+    </select>
+
+    <insert id="addRole">
+        insert into role(role,level) values (#{role},#{level})
+    </insert>
+
+    <update id="editRole">
+        update role set role=#{role},level=#{level} where id=#{id}
+    </update>
+
+    <delete id="deleteRole" parameterType="int">
+        delete from role where id=#{id};
+        delete from role_per where roleid=#{id};
+    </delete>
+</mapper>

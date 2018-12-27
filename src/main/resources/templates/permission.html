@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Laoyang BBS</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/fontAwesome.css">
+    <link rel="stylesheet" href="css/light-box.css">
+    <link rel="stylesheet" href="css/templatemo-style.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Kanit:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+    <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">
+        <a href="/">返回<em>大厅</em></a>
+    </div>
+    <div class="menu-icon">
+        <span></span>
+    </div>
+</nav>
+
+<div class="page-heading">
+    <div class="container">
+        <div class="heading-content">
+            <h1>权限<em>管理</em></h1>
+        </div>
+    </div>
+</div>
+
+
+<div class="more-about-us">
+    <div class="container">
+        <div class="col-md-5 col-md-offset-7">
+            <div class="content">
+                <h2>关于权限管理</h2>
+                <span>是老杨啊</span>
+                <p>在本系统中，用户依权能的大小依次分为超级管理员、管理员和普通会员三种。普通会员默认只能
+                    进行浏览和发布文章以及编辑、删除自己的文章，还有评论。管理员可以赋予或更改普通用户执行
+                    这些操作的可行性，以及赋予他们部分修改他人文章等的权利。而超级管理员则可以赋予管理员管
+                    理用户权限的权限。
+                    <br><br>
+                    权限的赋予及剥除必须是对权能低于自己的对象进行。例如，超级管理员只能管理管理员和普通用
+                    户的权限，而不能管理另一个超级管理员的权能。超级管理员由系统自带，不予注册，不予赋权生成。
+                    有哪些权限？
+                <div class="table-item premium-item">
+                    <ul>
+                        <li>管理管理员</li>
+                        <li>管理角色</li>
+                        <li>发布文章</li>
+                        <li>评论文章</li>
+                        <li>修改自己文章</li>
+                        <li>修改他人文章</li>
+                        <li>编辑自己文章</li>
+                        <li>编辑他人文章</li>
+                        <li>删除自己文章</li>
+                        <li>删除他人文章</li>
+                    </ul>
+                </div>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="pricing-tables">
+    <div class="container">
+        <div class="col-md-4 col-sm-6">
+            <div class="table-item">
+                <h4>用户管理</h4>
+                <span>请谨慎操作</span>
+                <table class="table" align="center">
+                    <tr th:if="${user0}">
+                        <th th:text="${user0.getNickname()}" align="center"></th>
+                        <th th:text="${userRole0.getRole()}" align="center"></th>
+                        <!--编辑文章！！！！！！！！！！！-->
+                        <!--<button type='button' class='btn btn-default' data-target='#myModal2' data-toggle='modal'>编辑文章</button>-->
+                        <th><input th:type="button" data-target='#myModal0' data-toggle='modal' th:value="修改角色"></th>
+                        <!--Modal部分,默认不显示，内部样式自己随意定义-->
+                        <div class="modal fade" id="myModal0" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog" style="width: 700px;margin-top: 150px;">
+                                <div class="modal-content"
+                                     style="height: 400px;width: 700px;padding-left: 10px;padding-right: 10px">
+                                    <!--头部-->
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                                        </button>
+                                        <h4 class="modal-title" id="myModalLabel0">修改角色</h4>
+                                    </div>
+                                    <!--体部-->
+                                    <div class="modal-body" style="height: 200px">
+                                        <input hidden id="editRoleUserId0" th:value="${user0.id}">
+                                        <!--用户名<input class="form-control" id="nickname0" th:value="${user0.getNickname()}"-->
+                                                  <!--style="margin-bottom: 15px;"/>-->
+                                        选择角色<select  id="editRoleSeclection0" class="selectpicker" data-style="btn-warning">
+                                        <option th:each="temp:${allUserRole}" th:value="${temp.id}" th:text="${temp.getRole()}"></option>
+                                    </select>
+                                    </div>
+                                    <!--尾部-->
+                                    <div class="modal-footer" style="margin-top: 75px;">
+                                        <button type="button" id="editRole0" class="btn btn-primary btn-blue">确认</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </tr>
+                    <tr th:if="${user1}">
+                        <th th:text="${user1.getNickname()}" align="center"></th>
+                        <th th:text="${userRole1.getRole()}" align="center"></th>
+                        <th><input th:type="button" data-target='#myModal1' data-toggle='modal' th:value="修改角色"></th>
+                        <!--Modal部分,默认不显示，内部样式自己随意定义-->
+                        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog" style="width: 700px;margin-top: 150px;">
+                                <div class="modal-content"
+                                     style="height: 400px;width: 700px;padding-left: 10px;padding-right: 10px">
+                                    <!--头部-->
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                                        </button>
+                                        <h4 class="modal-title" id="myModalLabel">修改角色</h4>
+                                    </div>
+                                    <!--体部-->
+                                    <div class="modal-body" style="height: 200px">
+                                        <input hidden id="editRoleUserId1" th:value="${user1.id}">
+                                        <!--用户名<input class="form-control" id="nickname1" th:value="${user1.getNickname()}"-->
+                                                  <!--style="margin-bottom: 15px;"/>-->
+                                        选择角色<select id="editRoleSeclection1" class="selectpicker" data-style="btn-warning">
+                                        <option th:each="temp:${allUserRole}" th:value="${temp.id}" th:text="${temp.getRole()}"></option>
+
+                                    </select>
+                                    </div>
+                                    <!--尾部-->
+                                    <div class="modal-footer" style="margin-top: 75px;">
+                                        <button type="button" id="editRole1" class="btn btn-primary btn-blue">确认</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </tr>
+                    <tr th:if="${user2}">
+                        <th th:text="${user2.getNickname()}" align="center"></th>
+                        <th th:text="${userRole2.getRole()}" align="center"></th>
+                        <th><input th:type="button" data-target='#myModal2' data-toggle='modal' th:value="修改角色"></th>
+                        <!--Modal部分,默认不显示，内部样式自己随意定义-->
+                        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog" style="width: 700px;margin-top: 150px;">
+                                <div class="modal-content"
+                                     style="height: 400px;width: 700px;padding-left: 10px;padding-right: 10px">
+                                    <!--头部-->
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                                        </button>
+                                        <h4 class="modal-title" id="myModalLabel2">修改角色</h4>
+                                    </div>
+                                    <!--体部-->
+                                    <div class="modal-body" style="height: 200px">
+                                        <input hidden id="editRoleUserId2" th:value="${user2.id}">
+                                        选择角色<select id="editRoleSeclection2" class="selectpicker" data-style="btn-warning">
+                                        <option th:each="temp:${allUserRole}"  th:value="${temp.id}" th:text="${temp.getRole()}"></option>
+                                    </select>
+                                    </div>
+                                    <!--尾部-->
+                                    <div class="modal-footer" style="margin-top: 75px;">
+                                        <button type="button" id="editRole2" class="btn btn-primary btn-blue">确认</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </tr>
+                </table>
+                <div class="simple-btn">
+                    <a th:href="@{userpage(userpage=1)}" th:text="首页"></a>
+                    <a th:text="'当前页:'+${userpage}"></a>
+                    <a th:href="@{userpage(userpage=${userpage}-1)}" th:text="上一页"></a>
+                    <a th:href="@{userpage(userpage=${userpage}+1)}" th:text="下一页"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-6">
+            <div class="table-item premium-item">
+                <h4>我的角色</h4>
+                <span th:text="${myRole.getRole()}">超级管理员</span>
+                <!--<ul>-->
+                <!--<li>管理员管理</li>-->
+                <!--<li>评论管理</li>-->
+                <!--<li>发布文章</li>-->
+                <!--<li>编辑文章</li>-->
+                <!--<li>删除文章</li>-->
+                <!--</ul>-->
+
+                <table class="table" th:align="center">
+                    <tr th:each="temp:${myPermission}" th:align="center">
+                        <th th:text="${temp}" th:align="center"></th>
+                    </tr>
+                </table>
+                <div class="simple-btn">
+                    <a>我的权限</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="table-item">
+                <h4>角色列表</h4>
+                <span><input th:type="button"  data-target='#myModal7' data-toggle='modal' th:value="添加角色"></span>
+                <!--Modal部分,默认不显示，内部样式自己随意定义-->
+                <div class="modal fade" id="myModal7" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog" style="width: 700px;margin-top: 150px;">
+                        <div class="modal-content"
+                             style="height: 400px;width: 700px;padding-left: 10px;padding-right: 10px">
+                            <!--头部-->
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel7">添加角色</h4>
+                            </div>
+                            <!--体部-->
+                            <div class="modal-body" style="height: 200px">
+                                <input class="form-control" id="addrolename" placeholder="请输入角色名"
+                                          style="margin-bottom: 15px;"/>
+                                角色等级<select id="addRoleLevel">
+                                <option value="2">管理员</option>
+                                <option value="1">普通会员</option>
+                            </select>
+                                用户权限
+                                <select class="selectpicker" id="addRoleSlection" data-style="btn-warning" multiple>
+                                    <option value="1">发布文章</option>
+                                    <option value="2">评论文章</option>
+                                    <option value="3">编辑自己文章</option>
+                                    <option value="4">编辑他人文章</option>
+                                    <option value="5">删除自己文章</option>
+                                    <option value="6">删除他人文章</option>
+                                </select>
+                            </div>
+                            <!--尾部-->
+                            <div class="modal-footer" style="margin-top: 75px;">
+                                <button type="button" id="addRoleButton" class="btn btn-primary btn-blue">添加</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<ul>-->
+                <!--<li>管理员</li>-->
+                <!--<li>普通用户</li>-->
+                <!--<li>角色A</li>-->
+                <!--<li>角色B</li>-->
+                <!--<li>角色C</li>-->
+                <!--</ul>-->
+
+                <table class="table" align="center">
+                    <tr th:if="${role0}">
+                        <th><a href="#" th:href="@{queryPermission(id=${role0.getId()})}" th:text="${role0.getRole()}"></a></th>
+                        <!--编辑文章！！！！！！！！！！！-->
+                        <!--<button type='button' class='btn btn-default' data-target='#myModal2' data-toggle='modal'>编辑文章</button>-->
+                        <th><input th:type="button" data-target='#myModal3' data-toggle='modal' th:value="编辑权限"></th>
+                        <!--Modal部分,默认不显示，内部样式自己随意定义-->
+                        <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog" style="width: 700px;margin-top: 150px;">
+                                <div class="modal-content"
+                                     style="height: 400px;width: 700px;padding-left: 10px;padding-right: 10px">
+                                    <!--头部-->
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                                        </button>
+                                        <h4 class="modal-title" id="myModalLabel3">编辑权限</h4>
+                                    </div>
+                                    <!--体部-->
+                                    <div class="modal-body" style="height: 200px">
+                                        <input hidden id="ediPerRoleId0" th:value="${role0.getId()}">
+                                        <input hidden id="ediPerRoleLevel0" th:value="${role0.getLevel()}">
+                                        <input class="form-control" id="ediPerRoleName0" placeholder="请输入角色名"
+                                                  style="margin-bottom: 15px;"/>
+                                        角色等级<select id="ediPerRoleTargetLevel0">
+                                        <option value="2">管理员</option>
+                                        <option value="1">普通会员</option>
+                                    </select>
+                                        用户权限
+                                        <select class="selectpicker" id="ediPerRolePer0" data-style="btn-warning" multiple>
+                                            <option value="1">发布文章</option>
+                                            <option value="2">评论文章</option>
+                                            <option value="3">编辑自己文章</option>
+                                            <option value="4">编辑他人文章</option>
+                                            <option value="5">删除自己文章</option>
+                                            <option value="6">删除他人文章</option>
+                                        </select>
+                                    </div>
+                                    <!--尾部-->
+                                    <div class="modal-footer" style="margin-top: 75px;">
+                                        <button type="button" id="delPerRoleButton0" class="btn btn-primary btn-blue">删除该角色</button>
+                                        <button type="button" id="ediPerRoleButton0" class="btn btn-primary btn-blue">确认</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </tr>
+                    <tr th:if="${role1}">
+                        <th><a href="#" th:href="@{queryPermission(id=${role1.getId()})}" th:text="${role1.getRole()}"></a></th>
+                        <!--编辑文章！！！！！！！！！！！-->
+                        <!--<button type='button' class='btn btn-default' data-target='#myModal2' data-toggle='modal'>编辑文章</button>-->
+                        <th><input th:type="button" data-target='#myModal4' data-toggle='modal' th:value="编辑权限"></th>
+                        <!--Modal部分,默认不显示，内部样式自己随意定义-->
+                        <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog" style="width: 700px;margin-top: 150px;">
+                                <div class="modal-content"
+                                     style="height: 400px;width: 700px;padding-left: 10px;padding-right: 10px">
+                                    <!--头部-->
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                                        </button>
+                                        <h4 class="modal-title" id="myModalLabel4">编辑权限</h4>
+                                    </div>
+                                    <!--体部-->
+                                    <div class="modal-body" style="height: 200px">
+                                        <input hidden id="ediPerRoleId1" th:value="${role1.getId()}">
+                                        <input hidden id="ediPerRoleRole1" th:value="${role1.getRole()}">
+                                        <input hidden id="ediPerRoleLevel1" th:value="${role1.getLevel()}">
+                                        <input class="form-control" id="ediPerRoleName1"  placeholder="请输入角色名"
+                                                  style="margin-bottom: 15px;"/>
+                                        角色等级<select id="ediPerRoleTargetLevel1">
+                                        <option value="2">管理员</option>
+                                        <option value="1">普通会员</option>
+                                    </select>
+                                        用户权限
+                                        <select class="selectpicker" id="ediPerRolePer1" data-style="btn-warning" multiple>
+                                            <option value="1">发布文章</option>
+                                            <option value="2">评论文章</option>
+                                            <option value="3">编辑自己文章</option>
+                                            <option value="4">编辑他人文章</option>
+                                            <option value="5">删除自己文章</option>
+                                            <option value="6">删除他人文章</option>
+                                        </select>
+                                    </div>
+                                    <!--尾部-->
+                                    <div class="modal-footer" style="margin-top: 75px;">
+                                        <button type="button" id="delPerRoleButton1" class="btn btn-primary btn-blue">删除该角色</button>
+                                        <button type="button" id="ediPerRoleButton1" class="btn btn-primary btn-blue">确认</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </tr>
+                    <tr th:if="${role2}">
+                        <th><a href="#" th:href="@{queryPermission(id=${role2.getId()})}" th:text="${role2.getRole()}"></a></th>
+                        <!--编辑文章！！！！！！！！！！！-->
+                        <!--<button type='button' class='btn btn-default' data-target='#myModal2' data-toggle='modal'>编辑文章</button>-->
+                        <th><input th:type="button" data-target='#myModal5' data-toggle='modal' th:value="编辑权限"></th>
+                        <!--Modal部分,默认不显示，内部样式自己随意定义-->
+                        <div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog" style="width: 700px;margin-top: 150px;">
+                                <div class="modal-content"
+                                     style="height: 400px;width: 700px;padding-left: 10px;padding-right: 10px">
+                                    <!--头部-->
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                                        </button>
+                                        <h4 class="modal-title" id="myModalLabel5">编辑权限</h4>
+                                    </div>
+                                    <!--体部-->
+                                    <div class="modal-body" style="height: 200px">
+                                        <input hidden id="ediPerRoleId2" th:value="${role2.getId()}">
+                                        <input hidden id="ediPerRoleLevel2" th:value="${role2.getLevel()}">
+                                        <input class="form-control" id="ediPerRoleName2" placeholder="请输入角色名"
+                                                  style="margin-bottom: 15px;"/>
+                                        角色等级<select id="ediPerRoleTargetLevel2">
+                                        <option value="2">管理员</option>
+                                        <option value="1">普通会员</option>
+                                    </select>
+                                        用户权限
+                                        <select class="selectpicker" id="ediPerRolePer2" data-style="btn-warning" multiple>
+                                            <option value="1">发布文章</option>
+                                            <option value="2">评论文章</option>
+                                            <option value="3">编辑自己文章</option>
+                                            <option value="4">编辑他人文章</option>
+                                            <option value="5">删除自己文章</option>
+                                            <option value="6">删除他人文章</option>
+                                        </select>
+                                    </div>
+                                    <!--尾部-->
+                                    <div class="modal-footer" style="margin-top: 75px;">
+                                        <button type="button" id="delPerRoleButton2" class="btn btn-primary btn-blue">删除该角色</button>
+                                        <button type="button" id="ediPerRoleButton2" class="btn btn-primary btn-blue">确认</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </tr>
+                </table>
+                <div class="simple-btn">
+                    <a th:href="@{rolepage(rolepage=1)}" th:text="首页"></a>
+                    <a th:text="'当前页:'+${rolepage}"></a>
+                    <a th:href="@{rolepage(rolepage=${rolepage}-1)}" th:text="上一页"></a>
+                    <a th:href="@{rolepage(rolepage=${rolepage}+1)}" th:text="下一页"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<!-- Modal -->
+<div id="modal" class="modal">
+    <!-- Modal Content -->
+    <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <div id="unlogin">
+                <h3 class="header-title">欢迎使用老杨的系统</h3>
+                <br><br>
+                <h4><a href="/tologin">点我登陆</a></h4>
+                <br><br>
+                <h4>没有账号？</h4>
+                <br><br>
+                <h4><a href="/toregister">点我注册</a></h4>
+            </div>
+            <div class="close-btn"><img src="img/close_contact.png" alt=""></div>
+        </div>
+
+    </div>
+</div>
+
+<section class="overlay-menu">
+    <div class="container">
+        <div class="row">
+            <div class="main-menu">
+                <ul>
+                    <li>
+                        <a href="/">系统首页</a>
+                    </li>
+
+                    <li>
+                        <a href="/toarticle">所有文章</a>
+                    </li>
+                    <li>
+                        <a href="/tomyarticle">我的文章</a>
+                    </li>
+                    <li>
+                        <a href="/topermission">权限管理</a>
+                    </li>
+                    <li>
+                        <a href="/tologin">登陆</a>
+                    </li>
+                    <li>
+                        <a href="/toregister">注册</a>
+                    </li>
+                    <li>
+                        <a href="/tologout">登出</a>
+                    </li>
+                </ul>
+                <p>may you happy to use laoyang's bbs</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+
+<script src="js/vendor/bootstrap.min.js"></script>
+
+
+<script src="bootstrap-select-1.13.0-dev/dist/js/bootstrap-select.js"></script>
+<link rel="stylesheet" href="bootstrap-select-1.13.0-dev/dist/css/bootstrap-select.css">
+
+<script src="js/plugins.js"></script>
+<script src="js/main.js"></script>
+<script src="js/permission.js"></script>
+
+</body>
+</html>

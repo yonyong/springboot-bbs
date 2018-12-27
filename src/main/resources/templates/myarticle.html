@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Laoyang BBS</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/fontAwesome.css">
+    <link rel="stylesheet" href="css/light-box.css">
+    <link rel="stylesheet" href="css/templatemo-style.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Kanit:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+    <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">
+        <a href="/">返回<em>大厅</em></a>
+    </div>
+    <div class="menu-icon">
+        <span></span>
+    </div>
+</nav>
+
+<div class="page-heading">
+    <div class="container">
+        <div class="heading-content">
+            <h1>我的<em>文章</em></h1>
+        </div>
+    </div>
+</div>
+
+
+<div class="blog-entries">
+    <div class="container">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="blog-posts">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="blog-post" th:if="${list0}">
+                            <img src="img/blog_post_1.png" alt="">
+                            <div class="text-content">
+                                <h2><a href="#" th:href="@{article(id=${list0.article_id})}" th:text="${list0.article_title}"></a></h2>
+                                <div class="simple-btn">
+                                    <a href="#" th:text="${list0.article_author}"></a>
+                                </div>
+                                <br>
+                                <span>发布时间<a href="#" th:text="${list0.article_date}"></a> /评论数 <a href="#" th:text="${list0.count}"></a> / 最后评论时间<a href="#" th:text="${list0.reply_date}"></a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="blog-post" th:if="${list1}">
+                            <img src="img/blog_post_2.png" alt="">
+                            <div class="text-content">
+                                <h2><a href="#" th:href="@{article(id=${list1.article_id})}" th:text="${list1.article_title}"></a></h2>
+                                <div class="simple-btn">
+                                    <a href="#" th:text="${list1.article_author}"></a>
+                                </div>
+                                <br>
+                                <span>发布时间<a href="#" th:text="${list1.article_date}"></a> /评论数 <a href="#" th:text="${list1.count}"></a> / 最后评论时间<a href="#" th:text="${list1.reply_date}"></a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="blog-post"  th:if="${list2}">
+                            <img src="img/blog_post_3.png" alt="">
+                            <div class="text-content">
+                                <h2><a href="#" th:href="@{article(id=${list2.article_id})}" th:text="${list2.article_title}"></a></h2>
+                                <div class="simple-btn">
+                                    <a href="#" th:text="${list2.article_author}"></a>
+                                </div>
+                                <br>
+                                <span>发布时间<a href="#" th:text="${list2.article_date}"></a> /评论数 <a href="#" th:text="${list2.count}"></a> / 最后评论时间<a href="#" th:text="${list2.reply_date}"></a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <ul class="page-number">
+                            <li class="active"><a href="#" th:href="@{mypage(mypage=1)}"><<</a></li>
+                            <li><a href="#" th:href="@{mypage(mypage=${mypage}-1)}"><</a></li>
+                            <li><a href="#" th:href="@{mypage(mypage=${mypage}+1)}">></a></li>
+                            <li><a th:text="${mypage}"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal button -->
+<div class="popup-icon">
+    <button id="modBtn" class="modal-btn"><img src="img/contact-icon.png" alt=""></button>
+</div>
+
+<!-- Modal -->
+<div id="modal" class="modal">
+    <!-- Modal Content -->
+    <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <div id="unlogin">
+                <h3 class="header-title">欢迎使用老杨的系统</h3>
+                <br><br>
+                <h4><a href="/tologin">点我登陆</a></h4>
+                <br><br>
+                <h4>没有账号？</h4>
+                <br><br>
+                <h4><a href="/toregister">点我注册</a></h4>
+            </div>
+            <div class="close-btn"><img src="img/close_contact.png" alt=""></div>
+        </div>
+
+    </div>
+</div>
+
+<section class="overlay-menu">
+    <div class="container">
+        <div class="row">
+            <div class="main-menu">
+                <ul>
+                    <li>
+                        <a href="/">系统首页</a>
+                    </li>
+
+                    <li>
+                        <a href="/toarticle">所有文章</a>
+                    </li>
+                    <li>
+                        <a href="/tomyarticle">我的文章</a>
+                    </li>
+                    <li>
+                        <a href="/topermission">权限管理</a>
+                    </li>
+                    <li>
+                        <a href="/tologin">登陆</a>
+                    </li>
+                    <li>
+                        <a href="/toregister">注册</a>
+                    </li>
+                    <li>
+                        <a href="/tologout">登出</a>
+                    </li>
+                </ul>
+                <p>may you happy to use laoyang's bbs</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+
+<script src="js/vendor/bootstrap.min.js"></script>
+
+<script src="js/plugins.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

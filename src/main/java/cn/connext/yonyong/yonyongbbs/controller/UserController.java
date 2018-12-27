@@ -1,7 +1,11 @@
 package cn.connext.yonyong.yonyongbbs.controller;
 
+import cn.connext.yonyong.yonyongbbs.entity.Role;
 import cn.connext.yonyong.yonyongbbs.entity.User;
+import cn.connext.yonyong.yonyongbbs.service.RoleService;
+import cn.connext.yonyong.yonyongbbs.service.Role_perService;
 import cn.connext.yonyong.yonyongbbs.service.UserService;
+import cn.connext.yonyong.yonyongbbs.service.User_roleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
@@ -20,6 +24,15 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    RoleService roleService;
+
+    @Autowired
+    Role_perService role_perService;
+
+    @Autowired
+    User_roleService user_roleService;
 
     /**
      * redis存放三次错误登陆 <>
@@ -98,6 +111,10 @@ public class UserController {
 
                 System.out.println("进如此循环");
                 userService.addUser(nickname,tel,password);
+                User user1=userService.selectUserByTel(tel);
+                int user_id=user1.getId();
+                user_roleService.add(user_id,3);
+
                 String jsonStr = "{\"errorCode\":\"1\",\"errorMessage\":\"success\"}";
 
                 return  jsonStr;

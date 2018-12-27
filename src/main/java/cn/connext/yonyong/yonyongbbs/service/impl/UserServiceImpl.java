@@ -8,10 +8,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService{
     @Autowired
     UserDao userDao;
+
+    @Override
+    public List<User> selectAllUser() {
+        return userDao.selectAllUser();
+    }
+
+    @Override
+    public List<User> selectAllUserByPage(int page) {
+        return userDao.selectAllUserByPage(page);
+    }
 
     @Override
 //    @Cacheable(value="selectUserByTel-key")

@@ -3,8 +3,8 @@ package cn.connext.yonyong.yonyongbbs.controller;
 import cn.connext.yonyong.yonyongbbs.entity.Article;
 import cn.connext.yonyong.yonyongbbs.entity.Reply;
 import cn.connext.yonyong.yonyongbbs.entity.User;
-import cn.connext.yonyong.yonyongbbs.service.ArticleService;
-import cn.connext.yonyong.yonyongbbs.service.ReplyService;
+import cn.connext.yonyong.yonyongbbs.service.*;
+import cn.connext.yonyong.yonyongbbs.util.License;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +23,21 @@ public class ArticleController {
 
     @Autowired
     ReplyService replyService;
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    RoleService roleService;
+
+    @Autowired
+    Role_perService role_perService;
+
+    @Autowired
+    License license;
+
+    @Autowired
+    User_roleService user_roleService;
 
     /**
      * 跳转到消息详情页面
@@ -58,6 +73,11 @@ public class ArticleController {
             String jsonStr = "{\"errorCode\":\"0\",\"errorMessage\":\"尚未登陆！\"}";
             return jsonStr;
         }
+        if(! (license.hasArticlePermission("发布文章",user)))
+        {
+            String jsonStr = "{\"errorCode\":\"2\",\"errorMessage\":\"没有该权限！\"}";
+            return jsonStr;
+        }
         int id=user.getId();
         String author=user.getNickname();
         articleService.addArticle(id,addArticleTitle,author,date,addArticleContent);
@@ -67,7 +87,8 @@ public class ArticleController {
 
     @RequestMapping("/editArticle")
     @ResponseBody
-    public String editArticle(@RequestParam("editArticleTitle")String editArticleTitle,
+    public String editArticle(@RequestParam("editArticleId")String editArticleId, //修改的文章的userid
+                              @RequestParam("editArticleTitle")String editArticleTitle,
                               @RequestParam("editArticleContent")String editArticleContent,
                               @RequestParam("articleId")int articleId,
                               HttpSession session){
@@ -75,6 +96,23 @@ public class ArticleController {
         if (user==null){
             String jsonStr = "{\"errorCode\":\"0\",\"errorMessage\":\"尚未登陆！\"}";
             return jsonStr;
+        }
+        if(! (license.hasArticlePermission("编辑自己文章",user))&&! (license.hasArticlePermission("编辑他人文章",user)))
+        {
+            String jsonStr = "{\"errorCode\":\"2\",\"errorMessage\":\"没有该权限！\"}";
+            return jsonStr;
+        }
+        if (user.getId()==Integer.valueOf(editArticleId)){
+            if(! (license.hasArticlePermission("编辑自己文章",user))){
+                String jsonStr = "{\"errorCode\":\"3\",\"errorMessage\":\"没有修改自己文章的权限！\"}";
+                return jsonStr;
+            }
+        }
+        else{
+            if(! (license.hasArticlePermission("编辑他人文章",user))){
+                String jsonStr = "{\"errorCode\":\"4\",\"errorMessage\":\"没有修改他人文章的权限！\"}";
+                return jsonStr;
+            }
         }
         Date date=new Date();
         articleService.updateArticle(editArticleTitle,date,editArticleContent,articleId);
@@ -84,12 +122,28 @@ public class ArticleController {
 
     @RequestMapping("/deleteArticle")
     @ResponseBody
-    public String editArticle(@RequestParam("articleId")int articleId,
+    public String editArticle(@RequestParam("articleId")int articleId,@RequestParam("deleteArticleId")int deleteArticleId,
                               HttpSession session){
         User user= (User) session.getAttribute("rs_user");
         if (user==null){
             String jsonStr = "{\"errorCode\":\"0\",\"errorMessage\":\"尚未登陆！\"}";
             return jsonStr;
+        }
+        if(! (license.hasArticlePermission("删除自己文章",user))&&! (license.hasArticlePermission("删除他人文章",user)))
+        {
+            String jsonStr = "{\"errorCode\":\"2\",\"errorMessage\":\"没有该权限！\"}";
+            return jsonStr;
+        }
+        if (user.getId()==Integer.valueOf(deleteArticleId)){
+            if(! (license.hasArticlePermission("删除自己文章",user))){
+                String jsonStr = "{\"errorCode\":\"3\",\"errorMessage\":\"没有删除自己文章权限！\"}";
+                return jsonStr;
+            }
+        }else{
+            if(! (license.hasArticlePermission("删除他人文章",user))){
+                String jsonStr = "{\"errorCode\":\"4\",\"errorMessage\":\"没有删除他人文章权限！\"}";
+                return jsonStr;
+            }
         }
         articleService.deleteArticle(articleId);
         String jsonStr = "{\"errorCode\":\"1\",\"errorMessage\":\"删除成功！\"}";
@@ -105,6 +159,11 @@ public class ArticleController {
         User user= (User) session.getAttribute("rs_user");
         if (user==null){
             String jsonStr = "{\"errorCode\":\"0\",\"errorMessage\":\"尚未登陆！\"}";
+            return jsonStr;
+        }
+        if(! (license.hasArticlePermission("评论文章",user)))
+        {
+            String jsonStr = "{\"errorCode\":\"2\",\"errorMessage\":\"没有该权限！\"}";
             return jsonStr;
         }
         String replyer=user.getNickname();

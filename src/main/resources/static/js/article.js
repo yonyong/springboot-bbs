@@ -27,8 +27,8 @@ $("#addArticleButton").on("click",function () {
             }else if ("0"==msg.errorCode) {
                 alert("您还尚未登陆，点击会话按钮进行登陆！")
                 return false;
-            } else{
-                alert("您没有权限！");
+            } else if ("2"==msg.errorCode){
+                alert("您没有发布文章的权限！");
                 return false;
             }
         }
@@ -39,6 +39,7 @@ $("#editArticleButton").on("click",function () {
     var editArticleTitle=$("#editArticleTitle").val();
     var editArticleContent=$("#editArticleContent").val();
     var articleId=$("#id").val();
+    var editArticleId =$("#editArticleId").val();
     if (editArticleTitle==""){
         alert("标题不能为空！");
         return false;
@@ -49,6 +50,7 @@ $("#editArticleButton").on("click",function () {
         return false;
     }
     var data={
+        editArticleId:editArticleId,
         articleId:articleId,
         editArticleTitle:editArticleTitle,
         editArticleContent:editArticleContent
@@ -67,8 +69,16 @@ $("#editArticleButton").on("click",function () {
             }else if ("0"==msg.errorCode) {
                 alert("您还尚未登陆，点击会话按钮进行登陆！")
                 return false;
-            } else{
-                alert("您没有权限！");
+            } else  if ("2"==msg.errorCode){
+                alert("很抱歉，您没有编辑文章的权限！");
+                return false;
+            }
+            else  if ("3"==msg.errorCode){
+                alert("很抱歉，您没有编辑自己文章的权限！");
+                return false;
+            }
+            else  if ("4"==msg.errorCode){
+                alert("很抱歉，您没有编辑他人文章的权限！");
                 return false;
             }
         }
@@ -77,7 +87,9 @@ $("#editArticleButton").on("click",function () {
 
 $("#deleteArticleButton").on("click",function () {
     var articleId=$("#id").val();
+    var deleteArticleId=$("#deleteArticleId").val();
     var data={
+        deleteArticleId:deleteArticleId,
         articleId:articleId
     };
 
@@ -94,8 +106,16 @@ $("#deleteArticleButton").on("click",function () {
             }else if ("0"==msg.errorCode) {
                 alert("您还尚未登陆，点击会话按钮进行登陆！")
                 return false;
-            } else{
-                alert("您没有权限！");
+            } else if ("2"==msg.errorCode){
+                alert ("提示：您没有删除文章的权限！");
+                return false;
+            }
+            else if ("3"==msg.errorCode){
+                alert ("提示：您没有删除自己文章的权限！");
+                return false;
+            }
+            else if ("4"==msg.errorCode){
+                alert ("提示：您没有删除他人文章的权限！");
                 return false;
             }
         }
@@ -106,7 +126,7 @@ $("#deleteArticleButton").on("click",function () {
 $("#replyButton").on("click",function () {
     var reply_content=$("#reply_content").val();
     var articleId=$("#id").val();
-    if (reply_content===""){
+    if (reply_content==""){
         alert("评论不能为空！");
         return false;
     }
@@ -128,8 +148,8 @@ $("#replyButton").on("click",function () {
             }else if ("0"==msg.errorCode) {
                 alert("您还尚未登陆，点击会话按钮进行登陆！")
                 return false;
-            } else{
-                alert("您没有权限！");
+            } else if ("2"==msg.errorCode){
+                alert("您没有评论文章的权限！");
                 return false;
             }
         }

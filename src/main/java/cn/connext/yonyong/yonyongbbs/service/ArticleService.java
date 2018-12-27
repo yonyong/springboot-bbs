@@ -1,6 +1,7 @@
 package cn.connext.yonyong.yonyongbbs.service;
 
 import cn.connext.yonyong.yonyongbbs.entity.Article;
+
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +18,21 @@ public interface ArticleService {
      * @param id
      */
     Article selectArticleById(int id);
+
+    /**
+     * 不分页查询用户所属的文章
+     * @param id
+     * @return
+     */
+    List<Article> selectAllArticleByUserId(int id);
+
+    /**
+     * 分页查询用户所属的文章
+     * @param id
+     * @param page
+     * @return
+     */
+    List<Article> selectArticleByUserId(int id,int page);
     /**
      * 添加文章
      * @param userid

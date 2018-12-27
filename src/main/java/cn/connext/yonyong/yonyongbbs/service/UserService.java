@@ -3,7 +3,22 @@ package cn.connext.yonyong.yonyongbbs.service;
 import cn.connext.yonyong.yonyongbbs.entity.User;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface UserService {
+    /**
+     * 查询所有用户
+     * @return
+     */
+    List<User> selectAllUser();
+
+    /**
+     * 分页查询所有数据
+     * @param page
+     * @return
+     */
+    List<User> selectAllUserByPage(int page);
+
     /**
      * 通过用户id查询用户
      * @param tel

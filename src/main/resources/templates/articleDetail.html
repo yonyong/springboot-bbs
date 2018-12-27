@@ -79,7 +79,7 @@
                                                 <!--头部-->
                                                 <div class="modal-header">
                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                    <h4 class="modal-title" id="myModalLabel">信息记录</h4>
+                                                    <h4 class="modal-title" id="myModalLabel">发布文章</h4>
                                                 </div>
                                                 <!--体部-->
                                                 <div class="modal-body" style="height: 200px">
@@ -106,10 +106,11 @@
                                                 <!--头部-->
                                                 <div class="modal-header">
                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                    <h4 class="modal-title" id="myModalLabel2">信息记录</h4>
+                                                    <h4 class="modal-title" id="myModalLabel2">编辑文章</h4>
                                                 </div>
                                                 <!--体部-->
                                                 <div class="modal-body" style="height: 200px">
+                                                    <input id="editArticleId" th:type="1" th:value="${article.getUserid()}">
                                                     <input class="form-control" th:value="${article.title}" id="editArticleTitle" style="margin-bottom: 15px;"/>
                                                     <textarea class='form-control' th:text="${article.content}" id="editArticleContent" style='height:180px;'></textarea>
                                                 </div>
@@ -133,10 +134,11 @@
                                                 <!--头部-->
                                                 <div class="modal-header">
                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                    <h4 class="modal-title" id="myModalLabel3">信息记录</h4>
+                                                    <h4 class="modal-title" id="myModalLabel3">删除文章</h4>
                                                 </div>
                                                 <!--体部-->
                                                 <div class="modal-body" style="height: 200px">
+                                                    <input id="deleteArticleId" th:type="1" th:value="${article.getUserid()}">
                                                     是否删除此文章？
                                                 </div>
                                                 <!--尾部-->
@@ -157,7 +159,7 @@
                                 <hr>
                                 <br>
                                 <textarea  id="reply_content" th:border="0"
-                                           name="content" rows="5" style="min-width: 90%" placeholder="说出你的想法"> </textarea>
+                                           name="content" rows="5" style="min-width: 90%" placeholder="说出你的想法"></textarea>
                                 <br>
                                 <div align="center">
                                 <input type="button" id="replyButton" value="评论">
@@ -210,7 +212,7 @@
                         <li class="active"><a href="#" th:href="@{replypage(replypage=1,articleid=${article.id})}"><<</a></li>
                         <li><a href="#" th:href="@{replypage(replypage=${replypage}-1,articleid=${article.id})}"><</a></li>
                         <li><a href="#" th:href="@{replypage(replypage=${replypage}+1,articleid=${article.id})}">></a></li>
-                        <li><a href="#">>></a></li>
+                        <li><a th:text="${replypage}"></a></li>
                     </ul>
                     </div>
                 </div>
@@ -273,6 +275,9 @@
                     </li>
                     <li>
                         <a href="/toregister">注册</a>
+                    </li>
+                    <li>
+                        <a href="/tologout">登出</a>
                     </li>
                 </ul>
                 <p>may you happy to use laoyang's bbs</p>

@@ -22,6 +22,21 @@ public interface ArticleDao {
     List<Article> selectAllArticle(int page);
 
     /**
+     * 不分页查询用户所属的文章
+     * @param id
+     * @return
+     */
+    List<Article> selectAllArticleByUserId(@Param("id") int id);
+
+    /**
+     * 分页查询用户所属的文章
+     * @param id
+     * @param page
+     * @return
+     */
+    List<Article> selectArticleByUserId(@Param("id") int id,@Param("page") int page);
+
+    /**
      * 根据文章id查询文章
      * @param id
      */
